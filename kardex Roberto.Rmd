@@ -1,0 +1,56 @@
+---
+title: "kardex"
+author: "RobertoTochimani"
+date: "29 de agosto de 2016"
+output: html_document
+---
+#**Kardex Roberto Tochimani Tochimani**
+###matricula: 201505267
+##*Otoño 2015*
+
+Programacion Actuarial I           08
+  
+Intr. a la Profesion Actuarial     10
+
+DHPC                               09
+
+Conceptos de Calculo               09
+
+Matematicas Basicas                10
+
+Problemas de Mat.Basicas           10
+
+Aprobadas: 6 Reprobadas: 0 cred: 34.00 puntos: 56 prom: 9.33
+
+##*Primavera 2016*
+
+Programacion Actuarial II          08
+
+Teoria del Interes I               08
+
+Microeconomia                      09
+
+Formacion Humana y Social          09 
+
+Calculo Diferencial                07
+
+Teoria de Ecuaciones               07
+
+
+probadas:6 Reprobadas: 0 cred: 30.00 puntos: 48 prom: 8.00
+
+##*Otoño 2016 carga en proceso*
+
+Calculo Integral 
+
+Programacion Actuarial III
+
+Macroeconomia
+
+Algebra Lineal I 
+
+Reg. Acad. y Cient. del Esp.
+
+Teoria del Interes II  
+
+
