@@ -103,6 +103,73 @@ m1
 m2<-cbind(m,y)
 m2
 
+#factores
+x <- factor(c("si","no","si","si","no","si","no"))
+x
+table(x) #cuenta 
+unclass(x)
+x <- factor(c("si","no","si","si","no","si","no"),levels = c("si","no")) #asigna el nivel manualmente #
+x
+table(x) 
+unclass(x)
+
+x <- factor(c("azul","azul","Rojo","amarillo","verde","azul"))
+x
+
+#Valores flatantes
+x <- c(1,2,NA,10,3)
+is.na(x)
+is.nan(x)
+
+x <- c(1,2,NaN,10,3)
+is.na(x)
+is.nan(x)
+
+#data Frames son tablas 
+x <- data.frame(Erick=1:4,Lori= c(T,T,F,F))
+row.names(x)<- c("Primero","Segundo","Tercero","Cuarto")#asigna nombres a las filas
+x
+nrow(x)
+ncol(x)
+attributes(x)
+names(x)<-c("Yarely","Karen")#cambia nombres de las columnas
+x
+#Los nombres no son exxclusivos de los dataframes 
+x <-1:3
+names(x)#NULL
+x
+names(x)<- c("Hugo","Paco","Luis")
+x
+
+x <-list(a=1:10,b=100:91,c=51:60)
+x
+names(x)<- c("sec 1","sec 2 ", "sec 3")
+x
+
+m <-matrix(1:4,2,2)
+m
+attributes(m)
+dimnames(m)<- list(c("fill1","fill2"),c("col1","col2"))
+m
+
+m <- matrix(nrow = 6,ncol = 6)
+dimnames(m)<- list(c(1:6),c("A","B","C","D","E","F"))
+m
+#lectura de datos
+getwd()
+setwd("~/Documentos/GitHub")
+data <- read.csv("Datos_S&P.csv")
+data <- read.table("Datos_S&P.csv",F,",")
+data
+
+
+
+
+
+
+
+
+
 
 
 
