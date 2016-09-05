@@ -5,7 +5,7 @@ date: "29 de agosto de 2016"
 output: html_document
 ---
 #**Kardex Roberto Tochimani Tochimani**
-###matricula: 201505267
+###matrícula: 201505267
 ##*Otoño 2015*
 
 Programacion Actuarial I           08
