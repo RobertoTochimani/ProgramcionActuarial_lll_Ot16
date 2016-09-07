@@ -162,14 +162,121 @@ data <- read.csv("Datos_S&P.csv")
 data <- read.table("Datos_S&P.csv",F,",")
 data
 
+##################################################################################
+
+args("Datos_S&P.csv")
+data <- read.table("Datos_S&P.csv",T,",", nrows = 100,skip = 5) #skik salta las primeras lineas dadas 
+clases <- sapply(data, class)
+data <- read.table("Datos_S&P.csv",TRUE,",", colClasses = clases)
+data
+
+#uso de dput y dget 
+y <- data.frame(a=1,b="a")
+dput(y)
+dput(y,file = "y.R")# guarda "y" con el nombre" y.R" notese que la R es el tipo de archivo 
+
+nueva.y <- dget("y.R") #llama el archivo Y.R y se lo asigna a nueva.y
+nueva.y
+
+x<- "Programación Actiarial III"
+y <- data.frame(a=1,b="a")
+dump(c("x","y"),file = "data.R")
+rm(x,y)#remueve x e Y
+source("data.R")#recupera los valores de x e Y
+objeto <-head(airquality)
+objeto
+
+# URL
+con <- url("http://www.fcfm.buap.mx/","r")
+#la r es por sólo lectura read only
+x <- readLines(con,7)
+#read lines es para ver las primeras x lineas de la paguina 
+x
 
 
+#creamos un vector 
+x <- c("a","b","c","d","e")
+#vemos el vector 
+x
+#extraemos elementos con []
+x[1]
+x[2]
+#Tambien podemos extraer una secuencia de elementos 
+x[1:4]
+#es posible extraer los elemntos que cumplen una restriccion
+x[x>"b"]
+#de manera equivalente se puede obtener un vector lógico
+u <- x =="c"# en este caso buscamos las c´s en el vector x 
+x[u]
 
+#creamos una lista 
+x <- list(foo=1:4, bar=0.6)
+#extraemos el primer elemento de la lista ,
+#este elemento es una lista que contiene una secuencia (esta será una lista )
+x[1]
+#extraemos nuevamente el primer elemento de la lista,
+#ahora el elemento es la secuencia en si (un vector)
+x[[1]]
+#extraemos el elemento por nombre 
+x$bar
+x[["bar"]]
+x["bar"]
 
+#################################################################################
 
+x$foo[2] #de la secuencia extrae el sehgundo elemento 
 
+#creamos una lista de 3 elementos 
+x <- list(foo=1:4, bar=0.6,baz="hola")
+#extraemos el primer y tercer elemento de la lista 
+x[c(1,3)]
+x[[c(1,3)]]
+name <-"foo"
+x[[name]]
+x$name
+x$foo
+#se pueden extraer elementos de los elementos extraidos
+x <- list(a=list(10,12,14), b=list(3.14,2.81))
+x[[c(1,3)]]
+x[[1]][[3]]
+x[c(2,1)]
 
+x<- matrix(1:6,2,3)
+x
+x[1,2]
+x[2,1]
+x[1,]
+x[,2]
+#con drop=flase, se mantiene la dimencion y el resultado sera una matriz
+x[1,2,drop = FALSE]
+x[1, ,drop =FALSE]
 
+x <- list(popo = 1:5)
+x$p #se pueded utilizar esta funcion usando solo una de sus letras del nombre
+x[["p"]] #notese que no sirve usando los cochetes a menos que ...
+x[["p",exact = FALSE]]#uses exact
+#valores faltantes 
+airquality[1:6,]
 
+completos <- complete.cases(airquality)
+completos #True = no vacio
+airquality[completos, ][1:6,]#xtraer de iarquality todos los valores true de la fila 1 a la 6
+airquality[1:6,][completos,]
+x <- 1:4 ; y <- 6:9
+x+y
+
+x>2
+x>=2
+y==8
+x*y
+x/y
+
+x <- matrix(1:4,2,2) ; y <- matrix(rep(10,4),2,2)
+#########rep repite un numero x veces, notar que en este caso x=4#####
+x;y
+x*y 
+x%*%y                 #####multiplicacion de matices######
+
+####################estructuras de control###########################
 
 
