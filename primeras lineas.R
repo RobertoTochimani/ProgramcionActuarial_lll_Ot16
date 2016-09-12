@@ -31,7 +31,7 @@ y <- c(1.7,"a")  #caracter
 y
 class(y)
 
-y <-(TRUE,2)     #numerico
+y <-(TRUE , 2)     #numerico
 y
 class(y)
 
@@ -278,5 +278,36 @@ x*y
 x%*%y                 #####multiplicacion de matices######
 
 ####################estructuras de control###########################
+
+x <- c("a","b","c","d")
+for(i in 1:4){print(x[i])}
+for (i in seq_along(x)){print(x[i])}
+for (letra in x){print(letra)}
+for (i in 1:4){print(x[i])}
+
+m <- matrix(1:6,2,3)
+for (i in 1:2) for(j in 1:3){print(m[i,j])
+}#cuando sabes el numero de filas y columnas
+
+for (i in seq_len(nrow(m)) ) for(j in seq_len(ncol(m))){print(m[i,j])
+}
+#####################################################################
+z <- 5
+COSA <- vector("numeric")
+while (z >= 3 && z <= 10){print(z)
+  COSA <- c(COSA,z)
+  moneda <- rbinom(1,1,0.5)
+    if(moneda == 1){#caminata aleatoria
+    z <- z+.5
+  } else {
+    z <- z-.5
+  }
+}
+plot(COSA, type = "l") #hace un gráfico
+
+
+
+
+
 
 
