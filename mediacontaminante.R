@@ -1,5 +1,4 @@
 
-
 mediacontaminante <- function(directorio=setwd
                               ("~/caso/specdata"), contaminante ="sulfate", id = 1:332) {
   getwd()

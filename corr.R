@@ -1,4 +1,5 @@
 
+
  corr <- function(directorio=setwd
                       ("~/caso/specdata"), horizonte = 0) {
   

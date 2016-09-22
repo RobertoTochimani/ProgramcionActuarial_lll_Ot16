@@ -1,4 +1,3 @@
-
 #funcion
 completos <- function(directorio=setwd
                       ("~/caso/specdata"),id = 1:332){
