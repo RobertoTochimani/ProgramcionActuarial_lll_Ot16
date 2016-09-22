@@ -61,6 +61,7 @@ z <- c(1+2i,3+4i,8+0i,0+3i,0)
 as.logical(z)
 
 z <- c("Programacion","Actuarial","III")
+z
 as.numeric(z)
 as.logical(z)
 as.complex(z)
@@ -305,9 +306,60 @@ while (z >= 3 && z <= 10){print(z)
 }
 plot(COSA, type = "l") #hace un gráfico
 
+################################################################################
+x0 <- 1
+tol <- 1e -8
+repeat { 
+  x1 <- calculoestimado (x0)
+  if (abs(x1-x0) < tol){
+    break
+  } else{
+    x0 <- x1
+  }
+}
 
+#creacion de funciones
+suma2 <- function(x,y){
+  x + y
+}
 
+mayor10 <- function(x){
+  x[x > 10]
+}
 
+mayorque <- function(x,n){
+    x[x > n]
+}
 
+promedioCol <-  function(x, quitar.NA = TRUE){
+      nc <- ncol(x)
+      medias <- vector("numeric",nc)
+      for (i in 1:nc) {
+        medias[i] <- mean(x[, i],na.rm = quitar.NA )
+      }
+      medias
+}
+
+#mean saca PROMEDIO
+#na.rm quita los valores
+
+#evaluacion presoza
+
+f <- function(a,b){
+ a^2
+}
+
+f <- function(a,b){
+  print(a)
+  print(b)
+}
+
+myplot <- function(x,y,type= "l", ...){
+  plot(x,y,type = type , ...)
+}
+
+#paste suma dos vectores cualquier duda usa ?
+
+#puede ser util complete.cases()
 
 

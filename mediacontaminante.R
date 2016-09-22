@@ -1,16 +1,15 @@
-#asigna directorio
-getwd()
-setwd("~/caso/specdata")
 
-#funcion
+
 mediacontaminante <- function(directorio=setwd
                               ("~/caso/specdata"), contaminante ="sulfate", id = 1:332) {
+  getwd()
+  setwd(directorio)
   suma <- 0
   total <- 0
   if (contaminante == "sulfate") {columna <- 2  }
   if (contaminante == "nitrate") {columna <- 3  }
   
-  dimencion <- length(id)
+  dimension <- length(id)
   
   for (i in id) {
     
@@ -22,16 +21,16 @@ mediacontaminante <- function(directorio=setwd
     if (i >=100) {
       nombre <- paste(i,".csv",sep = "")
     }
-#read the document
-    data <- read.csv(nombre,header = TRUE)
-#deja que la magia ocurra
+#lee
+  data <- read.csv(nombre,header = TRUE)
+#cuerpo
     medias <- mean(data[ , columna],na.rm = TRUE )
     if (is.nan(medias)) {medias<-0    
-    dimencion <- dimencion -1 }
+    dimension <- dimension -1 }
     
     suma <- suma + medias
   }
- total <- (suma/dimencion)
+ total <- (suma/dimension)
  #entrega resultado
  total
 }
