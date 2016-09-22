@@ -1,10 +1,14 @@
+
+getwd()
+setwd("~/caso/specdata")
 #funcion
+
 completos <- function(directorio=setwd
                       ("~/caso/specdata"),id = 1:332){
   getwd()
   setwd(directorio)
     
-  dimension <- length(id)
+  dimension <- length(id)+id[1]-1
     total <- vector("numeric")
     monitor <- vector("numeric")
   

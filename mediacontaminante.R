@@ -8,7 +8,7 @@ mediacontaminante <- function(directorio=setwd
   if (contaminante == "sulfate") {columna <- 2  }
   if (contaminante == "nitrate") {columna <- 3  }
   
-  dimension <- length(id)
+  dimension <- length(id)+id[1]-1
   
   for (i in id) {
     
