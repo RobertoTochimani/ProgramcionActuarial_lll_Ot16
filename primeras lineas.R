@@ -362,4 +362,307 @@ myplot <- function(x,y,type= "l", ...){
 
 #puede ser util complete.cases()
 
+#############################################
+#¿cómo r sabe qué valor asignar
+lm #primera funcion
+lm <- function(x){x*x} #renombramos la funcion 
+lm
+rm(lm)#remueve la funcion lm de ek gobla enviroment
+lm #te dedvuelve la primera funcion que esta en otro lugar 
+#usar la funcion search() ahi te muetra en donde se busaca la funcion en orden 
+#ejemplo primero busca en :".GlobalEnv" luego "tools:rstudio"
+#"package:stats,package:graphics" y así hasta encontrarlo
+library(ggplot2)#cambia el orden en que se busca la variable ponendo en segundo lugar 
+#ggplot2
+#SCOPING RULES
+
+hacer.potencia <-function(n){
+  potencia <- function(x){
+    x ^ n
+  }
+ potencia
+}
+cubica <- hacer.potencia(3)
+cuadrada <- hacer.potencia(2)
+#lo que hace es guardar las propiedades de una funcion a otra
+#PRUEBALO luego de correrla curre cubica o cuadrada con algun valor 
+#ejemplo
+cubica(2)
+
+
+#entorno de una funcion
+
+ls(environment(cubica))
+get("n",environment(cubica))
+
+ls(environment(cuadrada))
+get("n",environment(cuadrada))
+
+y <- 10
+
+f <- function(x){
+  y<-2
+  y^2+g(x)
+  
+}
+g <- function(x){
+  x*y
+}
+
+#correlo y fijate que la y <- 2 solo vale para la funcion en donde esta anidada.
+
+#mostrar fecha
+x <- as.Date("1970-01-01")
+x
+unclass(x)
+unclass((as.Date("1970-01-02")))#muestra los dias que pasan desde las dfechas dadas
+
+#######################3#LAPPLY#####################
+#match.fun(x) busca una funcion de nombre x
+#Ejemplo lapply, rnorm()crea numeros aleatorios
+x <- list( a = 1:5 , b = rnorm(1000) )
+lapply(x, mean)
+#ejemplo 2
+#cronrm(10,1)son 10 elementos  media 1 y variacion estandar 1 la predeterminada 
+x <- list( a = 1:5 , b = rnorm(10) , c = rnorm(10,1) , d = rnorm(10,2) )
+lapply(x, mean)
+#ejemplo 3
+#crea numeros aleatorios para el numero de x osea cuando x=1 crea
+#un numero aleatorio x=2 dos numeros y as..
+x  <- 1:4
+lapply(x, runif)
+#ejemplo 4, los varoles de max y min no los utilizará lapply sino
+#runif, osea que podemos poner valores en la lista de lapply y si alguna funcion
+#dentro de ella lo requiera la utiliza de otra manera no lo utiliza  
+x  <- 1:4
+lapply(x, runif, max = 15 , min = 5)
+
+#########################SAPPLY #######################33
+#hace algo similar que lapply solo que te simplifica el resultad,
+#en lapply te mostraba una lista y en lapply un vector para x= al lo que se ocupa abjajo
+#si los elementos de x son de diferente dimension entonces no te devuelve un vector
+#sino una matriz
+#ejemplo con x de igual dimencion, devuelve vector
+x <- list( a = 1:5 , b = rnorm(10) , c = rnorm(10,1) , d = rnorm(10,2) )
+sapply(x, mean)
+#ejemplo con x diferentes dimenciones devuelve matriz
+x  <- 1:4
+sapply(x, runif, max = 15 , min = 5)
+
+###########################APPLY############
+#crea una matriz con numeros aleatorios, la dimnesion de la mtris es de 
+#20 filas, 10 columnas
+x <- matrix(rnorm(200), 20 , 10)
+# el numero 2 dice que trabajara con columnas
+apply(x, 2,mean)
+# el numero 1 dice que trabajara con filas
+apply(x,1,sum)
+
+#rowsum(
+#rowMeans()
+#colSums()
+#colMeans()
+x <- matrix(rnorm(200), 20 ,10)
+apply(x, 1,quantile, probs = c(0.25,0.75))
+#quantile, para una coleccionde datos, ejemplo 1 al 100
+#trabajamos con las probabilidades de 20% y 75% como esta arriba
+#el .25 indica qu apartir de cual numero el 25% de los numeros son menores a el osea el 25
+#y el .75 incica que apartir de que numero en x los el 75% de los numeros son 
+#menores a el osea 75
+a <- array(rnorm(2*2*10) , c(2,2,10))
+apply(a, c(1,2),mean)
+#lo mismo pero ya programado 
+rowMeans(a,dims = 2)
+################## mapply ###########################3
+list(rep(1:4),rep(2:3),rep(3,2),rep(4,1)) 
+mapply(rep,1:4,4:1)
+
+##
+noise <- function(n,mean,sd){
+     rnorm(n,mean,sd)
+}
+noise(5,1,2)
+mapply(noise,1:5,1:5, 2)
+
+####### tapply#####
+x <- c(rnorm(10),runif(10),rnorm(10,1))
+f <- gl(3,10)
+f
+tapply(x, f, mean)#los mustra como vector
+tapply(x, f, mean, simplify = F) #los deja como lista 
+##################split"##################3
+
+x <- c(rnorm(10), runif(10),rexp(10))
+f <- gl(3,10)
+f
+split(x,f)
+lapply(split(x,f),mean)
+
+library(datasets)
+head(airquality)
+
+s <- split(airquality, airquality$Month)
+lapply(s, function(x) colMeans(x[,1:3]))
+sapply(s, function(x)colMeans(x[,1:4],na.rm = T))
+
+#otro ejemplo
+x <- rnorm(10)
+f1 <- gl(2,5)
+f2 <- gl(5,2)
+f1
+f2
+interaction(f1,f2)
+x
+str(split(x,list(f1,f2)))
+#####################################################################
+imprimemsj <- function(x){
+     if (x>0) {
+          print("x es mayor que 0")
+          else
+               print("x es manor que0")
+               invisible(x)   
+}}
+
+imprimemsj <- function(x){
+
+          if (is.na(x)) {
+          print("x es un valor faltante")
+          
+          else{
+          
+          print("x es mayor que 0")
+          }
+          else 
+               {print("x es manor que0")
+               invisible(x) 
+               
+          }
+               
+            
+      
+          }}
+
+traceback()#imprime la ultima funcion ejecutada, con sus errores, te sirve para
+#saber en quemomento de la funcion falló
+debug()#parecido al F8 de excel, hace la evaluacion paso a paso de una funcion
+#avanzas la funcion escribiendo n en la consola
+options(error =recover)
+?Error
+read.csv("perritosgay")
+
+install.packages("swirl")
+installed.packages("swir")
+library("swirl")
+swirl()
+#When you are at the R prompt (>):
+ #    | -- Typing skip() allows you to skip the current question.
+#| -- Typing play() lets you experiment with R on your own; swirl will ignore what you
+#| do...
+#| -- UNTIL you type nxt() which will regain swirl's attention.
+#| -- Typing bye() causes swirl to exit. Your progress will be saved.
+#| -- Typing main() returns you to swirl's main menu.
+#| -- Typing info() displays these options again.
+
+#main(1)
+
+#tarea hacer hasta la parte 6 de swird ss+ marca de agua con tu usuario de github
+################################################################
+x <- rnorm(100)
+str(x)
+summary(x)
+
+m <- matrix(rnorm(100),10,10)
+str(m)
+s <- split(airquality,airquality$Month)
+
+
+x <- rnorm(10)
+y <- rnorm(10, 50,5)
+summary(x)
+summary(y)
+
+set.seed(1)#establece una semilla de la cual podemos partir 
+rnorm(5)
+set.seed(2)
+rnorm(5)
+set.seed(1)#fijate que te dan los mismos valors de la primera semilla
+rnorm(5)
+normal1 <- rnorm(10000)
+normal2 <- rnorm(10000,10,5)
+hist(normal1)
+summary(normal1)
+hist(normal2)
+summary(normal2)
+rpois(10,1)
+poisson1 <- rpois(10000,1)
+poisson2 <- rpois(10000,10)
+hist(poisson1)
+hist(poisson2)
+ppois(2,2)
+ppois(4,2)
+ppois(6,2)
+
+for (i in 0:11) {
+     print(dpois(i,2))
+     
+}
+
+hist(runif(10000,10,20))
+
+set.seed(20)
+x <- rnorm(100,0,1)
+e <- rnorm(100,0,2)
+y <- 0.5 +2*x+e
+plot(x,y)
+
+z <- 0.5 + 2*x
+plot(x,z)
+plot(z,y)
+################################################################################
+set.seed(10)
+x <- rbinom(100,1,0.5)
+e <- rnorm(100,0,2)
+y <- 0.5 + 2*x + e
+summary(y)
+plot(x,y, main = "Modelo Lineal",col="dark red")
+
+set.seed(1)
+x <- rnorm(100)
+log.mu<- 0.5 +0.3*x
+y <- rpois(100,exp(log.mu))
+summary(y)
+plot(x,y, main = "Modelo Poisson",col= "forest green")
+###############################################################3
+#profiling
+hilert <- function(n){
+     i <- 1:n
+     1/outer(i-1,i,"+")
+     
+}
+x<-hilert(1000)
+system.time(svd(x))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
